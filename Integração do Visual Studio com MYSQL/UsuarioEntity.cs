@@ -8,5 +8,6 @@ namespace Integração_do_Visual_Studio_com_MYSQL
 {
     internal class UsuarioEntity
     {
+        //ola
     }
 }
