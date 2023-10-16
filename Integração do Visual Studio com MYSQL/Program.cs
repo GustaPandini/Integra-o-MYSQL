@@ -4,7 +4,8 @@
     {
         static void Main(string[] args)
         {
-            //Vazio
+            Menu menu = new Menu();
+            menu.MenuPrincipal();
         }
     }
 }
