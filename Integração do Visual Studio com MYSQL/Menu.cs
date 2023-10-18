@@ -17,14 +17,14 @@ namespace Integração_do_Visual_Studio_com_MYSQL
             Console.WriteLine("4 = Excluir Cadastro");
             return Convert.ToInt32(Console.ReadLine());
         }
-        public void MenuPrincipal(ICrud crud)
+        public void MenuPrincipal()
         {
             switch (LegendaMenuPrincipal())
             {
                 case 0:
                     break;
                 case 1:
-                    crud.Create(_cadastroModel);
+                    _cadastroModel.Create();
                     break;
                 case 2:
                     break;
