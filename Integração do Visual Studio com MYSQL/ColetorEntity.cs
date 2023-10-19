@@ -13,6 +13,6 @@ namespace Integração_do_Visual_Studio_com_MYSQL
         public string CNPJ { get; set; }
         public string Endereco { get; set; }
         public string Coleta { get; set; }
-        public string Usuario_idUsuario { get; set; }
+        public int Usuario_idUsuario { get; set; }
     }
 }

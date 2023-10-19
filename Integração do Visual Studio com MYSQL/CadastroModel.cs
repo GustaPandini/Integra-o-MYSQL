@@ -51,10 +51,11 @@ namespace Integração_do_Visual_Studio_com_MYSQL
                 coletor.Endereco = Console.ReadLine();
                 Console.WriteLine("Digite a sua forma de Coleta");
                 coletor.Coleta = Console.ReadLine();
+                coletor.Usuario_idUsuario = 12;
 
                 using (MySqlConnection connection = new MySqlConnection(conectionString))
                 {
-                    string sql = "INSERT INTO coletor VALUE (NULL, @CPF, @CNPJ, @Endereco, @Coleta)";
+                    string sql = "INSERT INTO coletor VALUE (NULL, @CPF, @CNPJ, @Endereco, @Coleta, @Usuario_idUsuario)";
                     int linhas = connection.Execute(sql, coletor);
                     Console.WriteLine($"Tipo inserido - {linhas} linhas afetadas");
                 }
