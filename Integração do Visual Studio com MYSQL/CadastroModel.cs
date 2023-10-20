@@ -14,29 +14,13 @@ namespace Integração_do_Visual_Studio_com_MYSQL
         public void Create()
         {
             UsuarioEntity cadastro = new UsuarioEntity();
-            Console.WriteLine("Digite o seu Nome");
-            cadastro.NOME = Console.ReadLine();
-            Console.WriteLine("Digite o seu Sexo");
-            cadastro.Sexo = Console.ReadLine();
-            Console.WriteLine("Digite a sua Idade");
-            cadastro.Idade = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Digite o seu Telfone");
-            cadastro.Telefone = Console.ReadLine();
-
-            using (MySqlConnection connection = new MySqlConnection(conectionString))
-            {
-                string sql = "INSERT INTO usuario VALUE (NULL, @NOME, @Sexo, @Idade, @Telefone)";
-                int linhas = connection.Execute(sql, cadastro);
-                Console.WriteLine($"Tipo inserido - {linhas} linhas afetadas");
-            }
-
-            Console.WriteLine("Deseja ser um Coletor de Residuos? ( S/N )");
-            string resp1 = Console.ReadLine().ToUpper();
-            if (resp1 == "S")
+            PopularCadstroUsuario(cadastro);
+            PopularUsarioNoBanco(cadastro);
+            string resp = Pergunta_S_N("Deseja ser um Coletor? ( S/N )");
+            if (resp == "S")
             {
                 ColetorEntity coletor = new ColetorEntity();
-                Console.WriteLine("O seu tipo de pessoa é Física (F) ou Juridica (J)?");
-                string resp2 = Console.ReadLine().ToUpper();
+                string resp2 = Pergunta_S_N("Pessoa Física (F) ou Juridica (J)?");
                 if (resp2 == "F")
                 {
                     Console.WriteLine("Digite seu CPF");
@@ -51,7 +35,11 @@ namespace Integração_do_Visual_Studio_com_MYSQL
                 coletor.Endereco = Console.ReadLine();
                 Console.WriteLine("Digite a sua forma de Coleta");
                 coletor.Coleta = Console.ReadLine();
-                coletor.Usuario_idUsuario = 12;
+                using (MySqlConnection connection = new MySqlConnection(conectionString))
+                {
+                    string sql = "SELECT * FROM usuario ORDER BY idUsuario DESC LIMIT 1";
+                    coletor.Usuario_idUsuario = this.GetConnection().QueryFirst<UsuarioEntity>(sql).idUsuario;
+                }
 
                 using (MySqlConnection connection = new MySqlConnection(conectionString))
                 {
@@ -60,6 +48,33 @@ namespace Integração_do_Visual_Studio_com_MYSQL
                     Console.WriteLine($"Tipo inserido - {linhas} linhas afetadas");
                 }
             }
+        }
+
+        private static string Pergunta_S_N(string mensagem)
+        {
+            Console.WriteLine(mensagem);
+            return Console.ReadLine().ToUpper();
+        }
+
+        private int PopularUsarioNoBanco(UsuarioEntity cadastro)
+        {
+            using (MySqlConnection connection = new MySqlConnection(conectionString))
+            {
+                string sql = "INSERT INTO usuario VALUE (NULL, @NOME, @Sexo, @Idade, @Telefone)";
+                return connection.Execute(sql, cadastro);
+            }
+        }
+
+        private static void PopularCadstroUsuario(UsuarioEntity cadastro)
+        {
+            Console.WriteLine("Digite o seu Nome");
+            cadastro.NOME = Console.ReadLine();
+            Console.WriteLine("Digite o seu Sexo");
+            cadastro.Sexo = Console.ReadLine();
+            Console.WriteLine("Digite a sua Idade");
+            cadastro.Idade = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Digite o seu Telfone");
+            cadastro.Telefone = Console.ReadLine();
         }
 
         public void Delete()
