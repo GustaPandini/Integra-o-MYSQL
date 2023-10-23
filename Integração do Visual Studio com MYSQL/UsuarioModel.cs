@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace Integração_do_Visual_Studio_com_MYSQL
 {
-    internal class CadastroModel : ICrud
+    internal class UsuarioModel : ICrud
     {
         public string conectionString = "Server=localhost;Database=testepi;User=root;Password=root;";
         public void Create()
         {
-            UsuarioEntity cadastro = new UsuarioEntity();
-            PopularCadstroUsuario(cadastro);
-            PopularUsarioNoBanco(cadastro);
+            UsuarioEntity cadastroUsuario = new UsuarioEntity();
+            PopularCadstroUsuario(cadastroUsuario);
+            PopularUsarioNoBanco(cadastroUsuario);
             string resp = Pergunta_S_N("Deseja ser um Coletor? ( S/N )");
             if (resp == "S")
             {

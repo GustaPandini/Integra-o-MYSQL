@@ -8,7 +8,7 @@ namespace Integração_do_Visual_Studio_com_MYSQL
 {
     public class Menu
     {
-        private CadastroModel _cadastroModel = new CadastroModel();
+        private UsuarioModel _cadastroModel = new UsuarioModel();
         public int LegendaMenuPrincipal()
         {
             Console.WriteLine("1 = Cadastrar Usuario ou Coletor");
