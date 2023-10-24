@@ -1,16 +1,21 @@
 ﻿using Dapper;
+using Integração_do_Visual_Studio_com_MYSQL.Helpers;
 using MySql.Data.MySqlClient;
+using Integração_do_Visual_Studio_com_MYSQL.Entity;
+using Integração_do_Visual_Studio_com_MYSQL.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Integração_do_Visual_Studio_com_MYSQL
+
+namespace Integração_do_Visual_Studio_com_MYSQL.Model
 {
     public class ColetorModel : DataBase
     {
-        private void CadastrarNovoColetor(ColetorEntity coletor)
+        ColetorEntity coletor = new ColetorEntity();
+        public void CadastrarNovoColetor()
         {
             string resp3 = ConsoleHelper.Pergunta_S_N("Pessoa Física (F) ou Juridica (J)?");
             if (resp3 == "F")
@@ -51,7 +56,7 @@ namespace Integração_do_Visual_Studio_com_MYSQL
             using (MySqlConnection connection = new MySqlConnection(conectionString))
             {
                 string sql = "SELECT * FROM usuario ORDER BY idUsuario DESC LIMIT 1";
-                coletor.Usuario_idUsuario = this.GetConnection().QueryFirst<UsuarioEntity>(sql).idUsuario;
+                coletor.Usuario_idUsuario = GetConnection().QueryFirst<UsuarioEntity>(sql).idUsuario;
             }
         }
         private void PopularColetorNoBanco(ColetorEntity coletor)
@@ -63,6 +68,6 @@ namespace Integração_do_Visual_Studio_com_MYSQL
                 Console.WriteLine($"Tipo inserido - {linhas} linhas afetadas");
             }
         }
-       
+
     }
 }

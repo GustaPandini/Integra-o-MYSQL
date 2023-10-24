@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Integração_do_Visual_Studio_com_MYSQL.Model;
 
-namespace Integração_do_Visual_Studio_com_MYSQL
+namespace Integração_do_Visual_Studio_com_MYSQL.Helpers
 {
     public class Menu
     {

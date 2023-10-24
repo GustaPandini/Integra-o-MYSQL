@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Integração_do_Visual_Studio_com_MYSQL
-{   
+namespace Integração_do_Visual_Studio_com_MYSQL.Entity
+{
     public class UsuarioEntity
     {
         public int idUsuario { get; set; }
