@@ -69,7 +69,24 @@ namespace Integração_do_Visual_Studio_com_MYSQL.Model
 
         public void Read()
         {
-            throw new NotImplementedException();
+            Console.Clear();
+            IEnumerable<UsuarioEntity> Usuarios = GetUsuario();
+            foreach (UsuarioEntity Usuario in Usuarios)
+            {
+                pedido.Produtos = GetProdutoPedido(pedido.ID).ToList();
+                Console.WriteLine(Usuario.NOME);
+            }
+        }
+        public void PegarIDUsuario()
+        {
+            string sql = "SELECT * FROM usuario WHERE idUsuario = @ID";
+            var parameters = new { ID = id };
+            return this.GetConnection().QueryFirst<UsuarioEntity>(sql, parameters);
+        }
+        public IEnumerable<UsuarioEntity> GetUsuario()
+        {
+            string sql = "SELECT * FROM usuario";
+            return this.GetConnection().Query<UsuarioEntity>(sql);
         }
 
         public void Update()

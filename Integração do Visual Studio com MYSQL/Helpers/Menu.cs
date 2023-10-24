@@ -28,6 +28,7 @@ namespace Integração_do_Visual_Studio_com_MYSQL.Helpers
                     _cadastroModel.Create();
                     break;
                 case 2:
+                    _cadastroModel.Read();
                     break;
                 case 3:
                     break;
